@@ -1,34 +1,29 @@
 {"beans":[{"attributes":[{"column_name":"data","length":"250","name":"data","primary_key":"false","sql_type":"text","type":"java.util.HashMap"}
 ],"methods":[],"name":"AnswerData","table_name":"answer_data","umlid":"3"}
 ,{"attributes":[],"methods":[{"name":"init(org.javaz.copse.model.iface.DataBaseI db)","type":"void"}
-,{"name":"getEntityDescriptor(Integer id)","type":"org.javaz.copse.model.iface.EntityDescriptorI"}
-,{"name":"getDescriptorImpl(Integer id)","type":"DescriptorImplI"}
-,{"name":"getMenuItem(Integer id)","type":"org.javaz.copse.model.iface.MenuItemI"}
-,{"name":"getAllMenuItemByPermission(UserProfileI profile, String permissionFlag)","type":"ArrayList<MenuItemI>"}
-,{"name":"getAllLanguages()","type":"java.util.ArrayList"}
-,{"name":"getPluginsForEntity(Integer entityId)","type":"java.util.ArrayList"}
-,{"name":"getButtonsForEntity(Integer entityId)","type":"java.util.ArrayList"}
-,{"name":"getHandlerDescriptorsForEntity(Integer entityId)","type":"java.util.ArrayList"}
-,{"name":"getUserProfile(String email)","type":"UserProfileI"}
+,{"name":"getEntityDescriptor(Comparable id)","type":"org.javaz.copse.model.iface.EntityDescriptorI"}
+,{"name":"getDescriptorImpl(Comparable id)","type":"DescriptorImplI"}
+,{"name":"getMenuItem(Comparable id)","type":"org.javaz.copse.model.iface.MenuItemI"}
+,{"name":"getAllMenuItemByPermission(UserProfileI profile, String permissionFlag)","type":"List<MenuItemI>"}
+,{"name":"getAllLanguages()","type":"List"}
+,{"name":"getPluginsForEntity(Comparable entityId)","type":"List"}
+,{"name":"getButtonsForEntity(Comparable entityId)","type":"List"}
+,{"name":"getHandlersForEntity(Comparable entityId, String action)","type":"List<HandlerI>"}
+,{"name":"getUser(String oauthId)","type":"UserI"}
 ,{"name":"changeUserProfile(UserProfileI profile, Integer otherId)","type":"UserProfileI"}
 ,{"name":"getOtherUserIdGrants(UserProfileI profile)","type":"java.util.HashMap"}
 ,{"name":"getProfile(ParameterProviderI provider)","type":"UserProfileI"}
-,{"name":"getPermissionCheckerImpls(Integer entityId)","type":"ArrayList<PermissionCheckerImplI>"}
+,{"name":"authorizeProfile(String oauthId, ParameterProviderI provider)","type":"UserProfileI"}
+,{"name":"getPermissionCheckerImpls(Comparable entityId)","type":"List<PermissionCheckerImplI>"}
+,{"name":"getDataBase(Comparable id)","type":"DataBaseI"}
 ],"name":"DataProvider","table_name":"data_provider","umlid":"19"}
 ,{"attributes":[{"column_name":"id","length":"250","name":"id","primary_key":"true","sql_type":"integer","type":"java.lang.Integer"}
-,{"column_name":"data","length":"250","name":"data","primary_key":"false","sql_type":"DataProviderI","type":"DataProviderI"}
 ],"methods":[{"name":"getPermissionFlagFromAction(ParameterProviderI provider)","type":"java.lang.String"}
-,{"name":"getHandler(ParameterProviderI provider)","type":"HandlerI"}
-],"name":"DescriptorImpl","table_name":"descriptor_impl","umlid":"60"}
+],"name":"DescriptorImpl","table_name":"descriptor_impl","umlid":"53"}
 ,{"attributes":[{"column_name":"data","length":"250","name":"data","primary_key":"false","sql_type":"DataProviderI","type":"DataProviderI"}
 ],"methods":[{"name":"init(String config)","type":"void"}
-,{"name":"handleRequest(UserProfileI profile, DescriptorImplI descriptor, ParameterProviderI provider)","type":"AnswerDataI"}
+,{"name":"handleRequest(String action, MenuItemI menuItem, UserProfileI profile, DescriptorImplI descriptor, ParameterProviderI provider)","type":"AnswerDataI"}
 ],"name":"Handler","table_name":"handler","umlid":"12"}
-,{"attributes":[{"column_name":"id","length":"250","name":"id","primary_key":"true","sql_type":"integer","type":"java.lang.Integer"}
-,{"column_name":"entity_id","length":"250","name":"entityId","primary_key":"false","sql_type":"integer","type":"java.lang.Integer"}
-,{"column_name":"sub_menu","length":"250","name":"subMenu","primary_key":"false","sql_type":"text","type":"java.util.ArrayList"}
-,{"column_name":"title","length":"250","name":"title","primary_key":"false","sql_type":"character varying(250)","type":"java.lang.String"}
-],"methods":[],"name":"MenuItem","table_name":"menu_item","umlid":"44"}
 ,{"attributes":[{"column_name":"parameter_arrays","length":"250","name":"parameterArrays","primary_key":"false","sql_type":"text","type":"java.util.HashMap"}
 ,{"column_name":"parameters","length":"250","name":"parameters","primary_key":"false","sql_type":"text","type":"java.util.HashMap"}
 ,{"column_name":"request_url","length":"250","name":"requestUrl","primary_key":"false","sql_type":"character varying(250)","type":"java.lang.String"}
@@ -42,16 +37,17 @@
 ,{"name":"getRequestURL()","type":"java.lang.String"}
 ,{"name":"getQueryString()","type":"java.lang.String"}
 ,{"name":"getRemoteIp()","type":"java.lang.String"}
+,{"name":"getSessionKey()","type":"java.lang.String"}
 ],"name":"ParameterProvider","table_name":"parameter_provider","umlid":"37"}
 ,{"attributes":[],"methods":[{"name":"checkPermissions(org.javaz.copse.logic.iface.UserProfileI profile, Integer entityId, String permissionFlag)","type":"java.lang.Boolean"}
-],"name":"PermissionCheckerImpl","table_name":"permission_checker_impl","umlid":"51"}
+],"name":"PermissionCheckerImpl","table_name":"permission_checker_impl","umlid":"44"}
 ,{"attributes":[{"column_name":"id","length":"250","name":"id","primary_key":"true","sql_type":"integer","type":"java.lang.Integer"}
 ,{"column_name":"email","length":"250","name":"email","primary_key":"false","sql_type":"character varying(250)","type":"java.lang.String"}
 ,{"column_name":"flags","length":"250","name":"flags","primary_key":"false","sql_type":"text","type":"java.util.HashMap"}
 ,{"column_name":"groups","length":"250","name":"groups","primary_key":"false","sql_type":"text","type":"java.util.ArrayList"}
 ,{"column_name":"original_id","length":"250","name":"originalId","primary_key":"false","sql_type":"integer","type":"java.lang.Integer"}
 ,{"column_name":"parent_id","length":"250","name":"parentId","primary_key":"false","sql_type":"integer","type":"java.lang.Integer"}
-],"methods":[{"name":"getGroupIds()","type":"java.util.ArrayList"}
+],"methods":[{"name":"getGroupIds()","type":"List"}
 ,{"name":"getFlag(String key)","type":"java.lang.String"}
 ,{"name":"setFlag(String key, String value)","type":"void"}
 ],"name":"UserProfile","table_name":"user_profile","umlid":"28"}

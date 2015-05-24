@@ -83,7 +83,11 @@ public class ${beanName}Helper extends AbstractMapConvertibleHelper<${beanName}I
     public static final String F_${attribute.column_name?upper_case} = "${attribute.column_name}";
     </#list>
 
-     public ${beanName}I buildFromMap(Map h) {
+    public ${beanName}Helper() {
+        setIdName(F_ID);
+        setTableName("${tablePrefix}${bean.table_name}");
+    }
+    public ${beanName}I buildFromMap(Map h) {
         ${beanName}I b = createNewInstance();
     <#list attributes as attribute>
         <#assign found = "false">

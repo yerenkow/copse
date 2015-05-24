@@ -28,6 +28,7 @@
 package ${package}.${subpkg};
 
 import ${package}.iface.*;
+import org.javaz.copse.model.iface.*;
 
 import java.util.*;
 

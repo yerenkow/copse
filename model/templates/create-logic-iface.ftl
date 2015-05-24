@@ -8,6 +8,8 @@
 <#assign attributes = bean.attributes>
 package ${package}.iface;
 
+import org.javaz.copse.model.iface.*;
+
 import java.util.*;
 import java.io.Serializable;
 
