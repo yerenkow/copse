@@ -65,7 +65,8 @@ public class JdbcDataProvider extends AbstractDataProvider {
 
     @Override
     public List<org.javaz.copse.model.iface.MenuItemI> getAllMenuItemByPermission(UserProfileI profile, String permissionFlag) {
-        return null;
+        //todo filter them by permission flags
+        return dao.all(menuItemHelper);
     }
 
     @Override
@@ -111,18 +112,13 @@ public class JdbcDataProvider extends AbstractDataProvider {
             return null;
         }
         UserProfile userProfile = new UserProfile(user);
-        provider.setAttributeInSession(UserProfileI.class.getName(), userProfile);
+        UserProfileSessionManager.storeProfile(provider, userProfile);
         return userProfile;
     }
 
     @Override
     public HashMap getOtherUserIdGrants(UserProfileI profile) {
         return null;
-    }
-
-    @Override
-    public UserProfileI getProfile(ParameterProviderI provider) {
-        return (UserProfileI) provider.getAttributeFromSession(UserProfileI.class.getName());
     }
 
     @Override
@@ -141,6 +137,18 @@ public class JdbcDataProvider extends AbstractDataProvider {
             }
         }
         return list;
+    }
+
+    @Override
+    public boolean checkPermission(UserProfileI profileI, Comparable entityId, String flag) {
+        List<PermissionCheckerImplI> impls = getPermissionCheckerImpls(entityId);
+        for (PermissionCheckerImplI impl : impls) {
+            Boolean check = impl.checkPermissions(profileI, entityId, flag);
+            if (!check) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public DataBaseI getDataBase(Comparable id) {
@@ -172,5 +180,9 @@ public class JdbcDataProvider extends AbstractDataProvider {
             }
         }
         return handlerIs;
+    }
+
+    public GenericMapConvertibleDAO getDao() {
+        return dao;
     }
 }

@@ -9,9 +9,18 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <modules>
         <module>copse-core</module>
         <module>copse-module-oauth</module>
+        <module>copse-module-web-lang</module>
+        <module>copse-module-web-menu</module>
+        <module>copse-module-web-entities</module>
+        <module>copse-module-web-fields</module>
+        <module>copse-module-web-table</module>
         <module>copse-module-web</module>
     </modules>
 

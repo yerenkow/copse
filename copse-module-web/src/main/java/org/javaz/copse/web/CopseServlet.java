@@ -33,7 +33,21 @@ public class CopseServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        AnswerDataI answerDataI = copseRequestProcessor.handleRequest(new HttpRequestParameterProvider(req, resp));
+        HttpRequestParameterProvider providerI = new HttpRequestParameterProvider(req, resp);
+        if(providerI.getParameter("m") == null && providerI.getParameter("q") != null) {
+            providerI.getParameters().put("m", providerI.getParameter("q"));
+        }
+        if(providerI.getParameter("a") == null) {
+            String action = providerI.getParameter("w");
+            if (action == null) {
+                action = "l";
+            }
+            if (action.equals("list")) {
+                action = "l";
+            }
+            providerI.getParameters().put("a", action);
+        }
+        AnswerDataI answerDataI = copseRequestProcessor.handleRequest(providerI);
         serializer.writeData(answerDataI, req, resp);
     }
 

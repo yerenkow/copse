@@ -6,7 +6,7 @@ import org.javaz.copse.model.iface.*;
 
 import java.util.*;
 
-public abstract class AbstractHandler implements HandlerI {
+public abstract class AbstractHandler<T extends DescriptorImplI> implements HandlerI<T> {
     private DataProviderI data;
 
     public AbstractHandler () {
@@ -29,5 +29,6 @@ public abstract class AbstractHandler implements HandlerI {
     }
 
     public abstract void init(String config);
-    public abstract AnswerDataI handleRequest(String action, MenuItemI menuItem, UserProfileI profile, DescriptorImplI descriptor, ParameterProviderI provider);
+    public abstract AnswerDataI handleRequest(String action, MenuItemI menuItem, UserProfileI profile,
+                                              T descriptor, ParameterProviderI provider);
 }

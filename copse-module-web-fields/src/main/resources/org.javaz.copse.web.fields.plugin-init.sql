@@ -1,0 +1,1 @@
+-- no actions required to apply this plugin, except of creating tables.

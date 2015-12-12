@@ -30,7 +30,7 @@ public class CopseRequestProcessor {
                 Integer entityId = menuItem.getEntityId();
                 DescriptorImplI descriptorImpl = data.getDescriptorImpl(entityId);
                 List<PermissionCheckerImplI> checkers = data.getPermissionCheckerImpls(entityId);
-                UserProfileI profile = data.getProfile(providerI);
+                UserProfileI profile = UserProfileSessionManager.getProfile(providerI);
                 for (PermissionCheckerImplI checker : checkers) {
                     if (!checker.checkPermissions(profile, entityId,
                             descriptorImpl.getPermissionFlagFromAction(providerI))) {

@@ -6,11 +6,12 @@ import java.util.*;
 import java.io.Serializable;
 
 
-public interface HandlerI  {
+public interface HandlerI<T extends DescriptorImplI>  {
     public DataProviderI getData();
     public void setData(DataProviderI data);
 
 
     public void init(String config);
-    public AnswerDataI handleRequest(String action, MenuItemI menuItem, UserProfileI profile, DescriptorImplI descriptor, ParameterProviderI provider);
+    public AnswerDataI handleRequest(String action, MenuItemI menuItem, UserProfileI profile,
+                                     T descriptor, ParameterProviderI provider);
 }

@@ -9,6 +9,10 @@ import java.util.*;
 public  class AnswerData implements AnswerDataI {
     private java.util.HashMap data;
 
+    public AnswerData(HashMap data) {
+        this.data = data;
+    }
+
     public AnswerData () {
     }
 

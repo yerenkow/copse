@@ -31,8 +31,8 @@ public abstract class AbstractDataProvider implements DataProviderI {
     public abstract UserI getUser(String oauthId);
     public abstract UserProfileI changeUserProfile(UserProfileI profile, Integer otherId);
     public abstract java.util.HashMap getOtherUserIdGrants(UserProfileI profile);
-    public abstract UserProfileI getProfile(ParameterProviderI provider);
     public abstract UserProfileI authorizeProfile(String oauthId, ParameterProviderI provider);
     public abstract List<PermissionCheckerImplI> getPermissionCheckerImpls(Comparable entityId);
     public abstract DataBaseI getDataBase(Comparable id);
+    public abstract boolean checkPermission(UserProfileI profileI, Comparable entityId, String flag);
 }

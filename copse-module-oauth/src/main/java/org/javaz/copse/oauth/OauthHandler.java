@@ -23,7 +23,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  */
-public class OauthHandler extends AbstractHandler {
+public class OauthHandler extends AbstractHandler<OauthDescriptor> {
     @Override
     public AbstractHandler createNewInstance() {
         return new OauthHandler();
@@ -51,9 +51,11 @@ public class OauthHandler extends AbstractHandler {
 
     private String OAUTH_CLIENT_ID = "";
     private String OAUTH_SECRET = "";
+    // todo make it configurable
     private String phase1Marker = "os";
     private String phase2Marker = "oc";
     private String successRedirect = "/copse/";
+    private String noSuchAccRedirect = "/copse/auth/nosuchacc.jsp";
 
     protected AuthorizationCodeFlow initializeFlow() throws IOException {
         return new GoogleAuthorizationCodeFlow.Builder(
@@ -73,7 +75,8 @@ public class OauthHandler extends AbstractHandler {
     }
 
     @Override
-    public AnswerDataI handleRequest(String action, MenuItemI menuItem, UserProfileI profile, DescriptorImplI descriptor, ParameterProviderI provider) {
+    public AnswerDataI handleRequest(String action, MenuItemI menuItem, UserProfileI profile,
+                                     OauthDescriptor descriptor, ParameterProviderI provider) {
         AnswerData answerData = new AnswerData();
         if (profile == null) {
             lock.lock();
@@ -140,6 +143,8 @@ public class OauthHandler extends AbstractHandler {
                 UserProfileI profileI = dataProviderI.authorizeProfile(email, providerI);
                 if (profileI != null) {
                     providerI.sendRedirect(successRedirect);
+                } else {
+                    providerI.sendRedirect(noSuchAccRedirect);
                 }
                 //todo unknown user handling
             }

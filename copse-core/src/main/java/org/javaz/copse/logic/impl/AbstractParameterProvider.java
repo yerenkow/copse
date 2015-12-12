@@ -7,8 +7,8 @@ import org.javaz.copse.model.iface.*;
 import java.util.*;
 
 public abstract class AbstractParameterProvider implements ParameterProviderI {
-    private java.util.HashMap parameterArrays;
-    private java.util.HashMap parameters;
+    protected HashMap<String, String> parameters = new HashMap<String, String>();
+    protected HashMap<String, String[]> parameterArrays = new HashMap<String, String[]>();
     private java.lang.String requestUrl;
 
     public AbstractParameterProvider () {

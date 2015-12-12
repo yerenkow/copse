@@ -23,6 +23,10 @@ import org.javaz.jdbc.base.*;
 import java.util.*;
 import java.sql.*;
 import java.io.Serializable;
+<#assign tableName = bean.table_name >
+<#if tableName?index_of(":") &gt; 0 >
+<#assign tableName=tableName?substring(0, tableName?index_of(":")) >
+</#if>
 
 public class ${beanName}Helper extends AbstractMapConvertibleHelper<${beanName}I> {
 
@@ -85,7 +89,7 @@ public class ${beanName}Helper extends AbstractMapConvertibleHelper<${beanName}I
 
     public ${beanName}Helper() {
         setIdName(F_ID);
-        setTableName("${tablePrefix}${bean.table_name}");
+        setTableName("${tablePrefix}${tableName}");
     }
     public ${beanName}I buildFromMap(Map h) {
         ${beanName}I b = createNewInstance();

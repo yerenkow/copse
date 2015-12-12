@@ -1,11 +1,11 @@
 INSERT INTO copse_generic_factory(
             id, factory_class, name, type)
     VALUES (1000, 'org.javaz.copse.oauth.OauthDescriptorFactory', 'OauthDescriptorFactory', 2),
-    VALUES (1001, 'org.javaz.copse.oauth.OauthHandlerFactory', 'OauthHandlerFactory', 3);
+    (1001, 'org.javaz.copse.oauth.OauthHandlerFactory', 'OauthHandlerFactory', 3);
 
 INSERT INTO copse_entity_descriptor_type(
             id, default_action, factory_id, title)
-    VALUES (1000, 'fake', 1000, 'OauthDescriptorType');
+    VALUES (1000, 'os', 1000, 'OauthDescriptorType');
 
 INSERT INTO copse_entity_descriptor(
             id, title, type_id)

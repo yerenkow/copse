@@ -8,5 +8,5 @@ import java.io.Serializable;
 
 public interface PermissionCheckerImplI  {
 
-    public java.lang.Boolean checkPermissions(org.javaz.copse.logic.iface.UserProfileI profile, Integer entityId, String permissionFlag);
+    java.lang.Boolean checkPermissions(org.javaz.copse.logic.iface.UserProfileI profile, Comparable entityId, String permissionFlag);
 }

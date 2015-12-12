@@ -17,6 +17,6 @@
     </session-config>
     <servlet-mapping>
         <servlet-name>CopseServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/cs</url-pattern>
     </servlet-mapping>
 </web-app>

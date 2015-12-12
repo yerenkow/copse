@@ -4,8 +4,12 @@ begin;
         <#assign tablePrefix = "tbl_">
     </#if>
     <#list beans as bean>
-    CREATE SEQUENCE ${tablePrefix}${bean.table_name}_id_sequence;
-    CREATE TABLE ${tablePrefix}${bean.table_name}
+<#assign tableName = bean.table_name >
+<#if tableName?index_of(":") &gt; 0 >
+<#assign tableName=tableName?substring(0, tableName?index_of(":")) >
+</#if>
+    CREATE SEQUENCE ${tablePrefix}${tableName}_id_sequence;
+    CREATE TABLE ${tablePrefix}${tableName}
     (
         <#assign attributes = bean.attributes>
         <#list attributes as attribute>
@@ -14,14 +18,14 @@ begin;
 
         <#list attributes as attribute>
             <#if attribute.primary_key == 'true' >
-            CONSTRAINT pk_${tablePrefix}${bean.table_name} PRIMARY KEY (${attribute.column_name})
+        CONSTRAINT pk_${tablePrefix}${tableName} PRIMARY KEY (${attribute.column_name})
             </#if>
         </#list>
     );
         <#list attributes as attribute>
             <#if attribute.primary_key == 'true'  >
-            ALTER TABLE ${tablePrefix}${bean.table_name} ALTER COLUMN ${attribute.column_name} SET NOT NULL;
-            ALTER TABLE ${tablePrefix}${bean.table_name} ALTER COLUMN ${attribute.column_name} SET DEFAULT nextval('${tablePrefix}${bean.table_name}_id_sequence'::regclass);
+    ALTER TABLE ${tablePrefix}${tableName} ALTER COLUMN ${attribute.column_name} SET NOT NULL;
+    ALTER TABLE ${tablePrefix}${tableName} ALTER COLUMN ${attribute.column_name} SET DEFAULT nextval('${tablePrefix}${tableName}_id_sequence'::regclass);
 
             </#if>
         </#list>
